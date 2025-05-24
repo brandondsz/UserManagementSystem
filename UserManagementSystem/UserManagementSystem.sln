@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMS.Application", "..\UMS.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMS.Infrastructure", "..\UMS.Infrastructure\UMS.Infrastructure.csproj", "{19116DE2-F7D2-4706-A493-AABEC0129047}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMS.Tests", "..\UMS.Tests\UMS.Tests.csproj", "{AC13A13C-D03A-4395-8F27-265352EA98A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{19116DE2-F7D2-4706-A493-AABEC0129047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19116DE2-F7D2-4706-A493-AABEC0129047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19116DE2-F7D2-4706-A493-AABEC0129047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC13A13C-D03A-4395-8F27-265352EA98A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC13A13C-D03A-4395-8F27-265352EA98A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC13A13C-D03A-4395-8F27-265352EA98A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC13A13C-D03A-4395-8F27-265352EA98A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,8 +19,15 @@ namespace UMS.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var user = await _service.GetUserAsync(id);
-            return user == null ? NotFound() : Ok(user);
+            try
+            {
+                var user = await _service.GetUserAsync(id);
+                return Ok(user);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { error = ex.Message });
+            }
         }
 
         [HttpGet("list")]
@@ -31,7 +38,7 @@ namespace UMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserDto dto)
+        public async Task<IActionResult> Create(CreateUserDto dto)
         {
             await _service.CreateUserAsync(dto);
             return Created("", null);
@@ -42,8 +49,15 @@ namespace UMS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, UserDto dto)
         {
-            await _service.UpdateUserAsync(id, dto);
-            return NoContent();
+            try
+            {
+                await _service.UpdateUserAsync(id, dto);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { error = ex.Message });
+            }
         }
 
     }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UMS.Application.DTOs;
+﻿using UMS.Application.DTOs;
+using UMS.Application.Mappers;
 using UMS.Core.Entities;
 using UMS.Core.Interfaces;
 
@@ -19,12 +15,18 @@ namespace UMS.Application.Services
             _repository = repository;
         }
 
-        public async Task<User> GetUserAsync(Guid id)
+        public async Task<UserDto> GetUserAsync(Guid id)
         {
-            return await _repository.GetByIdAsync(id);
+            var user =  await _repository.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User {id} not found.");
+            }
+            return UserMapper.ToDto(user);
         }
 
-        public async Task CreateUserAsync(UserDto dto)
+        public async Task CreateUserAsync(CreateUserDto dto)
         {
             var user = new User
             {
@@ -39,6 +41,10 @@ namespace UMS.Application.Services
         public async Task UpdateUserAsync(Guid id, UserDto dto)
         {
             var user = await _repository.GetByIdAsync(id);
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User {id} not found.");
+            }
             user.FirstName = dto.FirstName;
             user.LastName = dto.LastName;
             user.Email = dto.Email;
@@ -49,13 +55,7 @@ namespace UMS.Application.Services
         public IList<UserDto> GetAll()
         {
             var userQuery = _repository.GetAllIQueryable();
-            return userQuery.Select(u => new UserDto
-            {
-                Email = u.Email,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Id = u.Id
-            }).ToList();
+            return userQuery.Select(u => UserMapper.ToDto(u)).ToList();
         }
     }
 }
